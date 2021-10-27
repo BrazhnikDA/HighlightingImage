@@ -1,10 +1,10 @@
 import sys
+
 import cv2 as cv
 import numpy as np
 
 
 def CalcOfDamageAndNonDamage(image, name):
-
     hsv_img = cv.cvtColor(image, cv.COLOR_BGR2HSV)
 
     markers = np.zeros((image.shape[0], image.shape[1]), dtype="int32")
@@ -34,16 +34,22 @@ def CalcOfDamageAndNonDamage(image, name):
     return mask
 
 
+# @parameters - image, sizeMatrix
+# image - input image
+# sizeMatrix - size of Matrix for filter
+# @return - End of Matrix after apply filter
 def GaussianFilter(image, sizeMatrix):
-
     resImage = cv.GaussianBlur(image, (sizeMatrix, sizeMatrix), cv.BORDER_DEFAULT)
     cv.imshow("Gaussian Filter", resImage)
 
     return resImage
 
 
+# @parameters - image, sizeMatrix
+# image - input image
+# sizeMatrix - size of Matrix for filter
+# @return - End of Matrix after apply filter
 def ErodedFilter(image, sizeMatrix):
-
     kernel = cv.getStructuringElement(cv.MORPH_ELLIPSE, (sizeMatrix, sizeMatrix))
     resErode = cv.erode(image, kernel)
     cv.imshow("Eroded Filter", resErode)
@@ -51,8 +57,11 @@ def ErodedFilter(image, sizeMatrix):
     return resErode
 
 
+# @parameters - image, sizeMatrix
+# image - input image
+# sizeMatrix - size of Matrix for filter
+# @return - End of Matrix after apply filter
 def MedianFilter(image, sizeMatrix):
-
     imgBlur = cv.medianBlur(image, sizeMatrix, sizeMatrix)
     cv.imshow("Median Filter", imgBlur)
 
@@ -60,7 +69,6 @@ def MedianFilter(image, sizeMatrix):
 
 
 def main():
-
     # Constant
     NAME_KEY_ORIGINAL = "Original"
     NAME_KEY_ERODED = "Eroded"
